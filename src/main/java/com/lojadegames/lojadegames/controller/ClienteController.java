@@ -3,6 +3,7 @@ package com.lojadegames.lojadegames.controller;
 
 import com.lojadegames.lojadegames.model.Cliente;
 import com.lojadegames.lojadegames.repository.ClienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,14 +39,16 @@ public class ClienteController {
         return ResponseEntity.ok(clienteRepository.findAllByNomeContainingIgnoreCase(nome));
     }
 
+
+
     @PostMapping
-    public ResponseEntity<Cliente> post(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> post(@Valid @RequestBody  Cliente cliente) {
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteRepository.save(cliente));
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> put(@PathVariable Long id, @RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> put(@Valid @PathVariable Long id, @RequestBody Cliente cliente) {
         return clienteRepository.findById(id)
                 .map(resposta -> ResponseEntity.ok(resposta))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
