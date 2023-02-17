@@ -31,13 +31,16 @@ public class Cliente {
     @Size (min = 5,max = 255)
     private String telefone;
 
-   
 
-    public Jogo getJogo() {
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("cliente")
+    private List<Jogo> jogo;
+
+    public List<Jogo> getJogo() {
         return jogo;
     }
 
-    public void setJogo(Jogo jogo) {
+    public void setJogo(List<Jogo> jogo) {
         this.jogo = jogo;
     }
 

@@ -35,7 +35,17 @@ public class Jogo {
     @JsonIgnoreProperties("jogo")
     private Console console;
 
+    @ManyToOne
+    @JsonIgnoreProperties("jogo")
+    private Cliente cliente;
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public Console getConsole() {
         return console;
